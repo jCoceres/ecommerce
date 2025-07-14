@@ -1,12 +1,14 @@
 .login-container {
-  min-height: 100vh;
+  height: 100vh;
   background-color: #f7fafc;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2rem 1rem;
-  padding-top: calc(2rem + 80px); /* Padding superior para separar de la navbar */
+  padding: 1rem;
+  padding-top: 90px; /* Espacio para el header fijo */
+  padding-bottom: 1rem;
   box-sizing: border-box;
+  overflow-y: auto;
 }
 
 .login-card {
@@ -19,7 +21,7 @@
   max-width: 400px;
   position: relative;
   overflow: hidden;
-  margin-top: 20px;
+  margin: 0;
 }
 
 .login-card::before {
@@ -252,7 +254,9 @@
 /* Responsive Design */
 @media (max-width: 480px) {
   .login-container {
-    padding: 1rem;
+    padding: 0.5rem;
+    padding-top: 80px;
+    padding-bottom: 0.5rem;
   }
   
   .login-card {
