@@ -23,16 +23,18 @@ function App() {
         <AppProvider>
           <Router>
             <Header />
-            <Routes>
-              <Route path='/' element={<Home />} />
-              <Route path='/acerca-de' element={<AcercaDe />} />
-              <Route path='/contactos' element={<Contactos />} />
-              <Route path='/galeria-de-productos' element={<GaleriaDeProductos />} />
-              <Route path='/productos/:id' element={<ProductDetails />} />
-              <Route path='/admin' element={<RutasProtegidas requiredRole="admin"><Admin /></RutasProtegidas>} />
-              <Route path='/login' element={<Login />} />
-              <Route path='*' element={<NotFound />} />
-            </Routes>
+            <div className="app-content">
+              <Routes>
+                <Route path='/' element={<Home />} />
+                <Route path='/acerca-de' element={<AcercaDe />} />
+                <Route path='/contactos' element={<Contactos />} />
+                <Route path='/galeria-de-productos' element={<GaleriaDeProductos />} />
+                <Route path='/productos/:id' element={<ProductDetails />} />
+                <Route path='/admin' element={<RutasProtegidas requiredRole="admin"><Admin /></RutasProtegidas>} />
+                <Route path='/login' element={<Login />} />
+                <Route path='*' element={<NotFound />} />
+              </Routes>
+            </div>
             <Footer />
             
             <ToastContainer

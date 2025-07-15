@@ -16,6 +16,21 @@ html {
   scroll-behavior: smooth;
 }
 
+html, body, #root {
+  height: 100%;
+  min-height: 100vh;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-content {
+  flex: 1 0 auto;
+}
+
 a {
   font-weight: 500;
   color: #4299e1;
