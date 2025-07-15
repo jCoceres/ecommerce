@@ -163,6 +163,7 @@ const ProductList = ({ products }) => {
                   variant="primary" 
                   onClick={() => handleAddToCart(product)}
                   disabled={product.stock === 0}
+                  aria-label={`Agregar ${product.name} al carrito`}
                 >
                   <FaShoppingCart className="me-1" />
                   Agregar
@@ -172,6 +173,7 @@ const ProductList = ({ products }) => {
                   variant="outline-secondary" 
                   as={Link} 
                   to={`/productos/${product.id}`}
+                  aria-label={`Ver detalles de ${product.name}`}
                 >
                   <FaEye />
                 </ViewButton>

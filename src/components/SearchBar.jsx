@@ -74,18 +74,20 @@ const SearchBar = ({ searchTerm, onSearchChange, onClearSearch }) => {
           placeholder="Buscar productos..."
           value={searchTerm}
           onChange={(e) => onSearchChange(e.target.value)}
+          aria-label="Buscar productos"
         />
         {searchTerm && (
           <ClearButton
             type="button"
             onClick={onClearSearch}
             title="Limpiar búsqueda"
+            aria-label="Limpiar búsqueda"
           >
-            <FaTimes />
+            <FaTimes aria-hidden="true" />
           </ClearButton>
         )}
-        <SearchButton type="button" title="Buscar">
-          <FaSearch />
+        <SearchButton type="button" title="Buscar" aria-label="Buscar productos">
+          <FaSearch aria-hidden="true" />
         </SearchButton>
       </StyledInputGroup>
     </SearchContainer>

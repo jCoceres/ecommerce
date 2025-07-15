@@ -87,9 +87,9 @@ const Login = () => {
           <p>Bienvenido de vuelta</p>
         </div>
 
-        <form className="login-form" onSubmit={handleSubmit}>
+        <form className="login-form" onSubmit={handleSubmit} noValidate>
           {errors.general && (
-            <div className="error-message-login">
+            <div className="error-message-login" role="alert" aria-live="polite">
               {errors.general}
             </div>
           )}
@@ -104,8 +104,11 @@ const Login = () => {
               onChange={handleChange}
               className={errors.email ? 'error' : ''}
               required
+              aria-describedby={errors.email ? "email-error" : undefined}
+              aria-invalid={errors.email ? "true" : "false"}
+              autoComplete="email"
             />
-            {errors.email && <span className="error-text">{errors.email}</span>}
+            {errors.email && <span className="error-text" id="email-error" role="alert">{errors.email}</span>}
           </div>
 
           <div className="login-form-group">
@@ -118,8 +121,11 @@ const Login = () => {
               onChange={handleChange}
               className={errors.password ? 'error' : ''}
               required
+              aria-describedby={errors.password ? "password-error" : "password-help"}
+              aria-invalid={errors.password ? "true" : "false"}
+              autoComplete="current-password"
             />
-            {errors.password && <span className="error-text">{errors.password}</span>}
+            {errors.password && <span className="error-text" id="password-error" role="alert">{errors.password}</span>}
             <div className="show-password-container">
               <input
                 type="checkbox"
@@ -127,8 +133,9 @@ const Login = () => {
                 checked={showPassword}
                 onChange={(e) => setShowPassword(e.target.checked)}
                 className="show-password-checkbox"
+                aria-describedby="password-visibility-help"
               />
-              <label htmlFor="showPassword" className="show-password-label">
+              <label htmlFor="showPassword" className="show-password-label" id="password-visibility-help">
                 Mostrar contraseña
               </label>
             </div>
@@ -138,11 +145,12 @@ const Login = () => {
             type="submit"
             className="login-button"
             disabled={isLoading}
+            aria-describedby={isLoading ? "loading-status" : undefined}
           >
             {isLoading ? (
               <>
-                <div className="loading-spinner-small"></div>
-                Iniciando sesión...
+                <div className="loading-spinner-small" aria-hidden="true"></div>
+                <span id="loading-status">Iniciando sesión...</span>
               </>
             ) : (
               'Iniciar Sesión'

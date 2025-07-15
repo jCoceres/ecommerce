@@ -32,7 +32,7 @@ const ProductDetails = () => {
               <p className="product-price">${producto.price}</p>
               <p className="product-description">{producto.description}</p>
               <div className="product-stock">
-                <span className={`stock-badge ${producto.stock > 0 ? 'in-stock' : 'out-of-stock'}`}>
+                <span className={`stock-badge ${producto.stock > 0 ? 'in-stock' : 'out-of-stock'}`} aria-label={`Stock disponible: ${producto.stock > 0 ? `${producto.stock} unidades` : 'Sin stock'}`}>
                   {producto.stock > 0 ? `${producto.stock} en stock` : 'Sin stock'}
                 </span>
               </div>
@@ -40,6 +40,7 @@ const ProductDetails = () => {
                 className="add-to-cart-btn" 
                 disabled={producto.stock === 0}
                 onClick={handleAddToCartClick}
+                aria-label={producto.stock === 0 ? `${producto.name} sin stock` : `Agregar ${producto.name} al carrito`}
               >
                 {producto.stock === 0 ? 'Sin stock' : 'Agregar al carrito'}
               </button>

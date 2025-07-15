@@ -59,23 +59,31 @@ const Cart = ({ cartItems, isOpen, onClose, eliminarProducto, vaciarCarrito }) =
               <>
                 <div className="cart-items">
                   {cartItems.map((item) => (
-                    <div key={item.id} className="cart-item">
+                    <div key={item.id} className="cart-item" role="listitem">
                       <div className="cart-item-info">
                         <h4>{item.name}</h4>
-                        <p>Cantidad: {item.quantity}</p>
+                        <p aria-label={`Cantidad en carrito: ${item.quantity}`}>Cantidad: {item.quantity}</p>
                       </div>
-                      <div className="cart-item-price">
+                      <div className="cart-item-price" aria-label={`Precio total: $${(item.price * item.quantity).toFixed(2)}`}>
                         ${(item.price * item.quantity).toFixed(2)}
                       </div>
-                      <button className="remove-btn" onClick={() => eliminarProducto(item)}>
+                      <button 
+                        className="remove-btn" 
+                        onClick={() => eliminarProducto(item)}
+                        aria-label={`Eliminar ${item.name} del carrito`}
+                      >
                         Eliminar
                       </button>
                     </div>
                   ))}
                 </div>
                 <div className="cart-total">
-                  <h3>Total: ${total.toFixed(2)}</h3>
-                  <button className="clear-cart-button" onClick={vaciarCarrito}>
+                  <h3 aria-label={`Total del carrito: $${total.toFixed(2)}`}>Total: ${total.toFixed(2)}</h3>
+                  <button 
+                    className="clear-cart-button" 
+                    onClick={vaciarCarrito}
+                    aria-label="Vaciar todo el carrito de compras"
+                  >
                     🗑️ Vaciar carrito
                   </button>
                 </div>

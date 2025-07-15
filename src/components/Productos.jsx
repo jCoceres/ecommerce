@@ -33,15 +33,19 @@ const Productos = ({ product, agregarCarrito }) => {
       <p className="precio">${product.price}</p>
       <p className="stock">Stock: {product.stock}</p>
       <div className="cantidad-container">
-        <button className="qtyButton" onClick={decrease}>-</button>
-        <span>{cantidad}</span>
-        <button className="qtyButton" onClick={increase}>+</button>
+        <button className="qtyButton" onClick={decrease} aria-label="Disminuir cantidad">-</button>
+        <span aria-label={`Cantidad: ${cantidad}`}>{cantidad}</span>
+        <button className="qtyButton" onClick={increase} aria-label="Aumentar cantidad">+</button>
       </div>
       <div className="button-container">
-        <button onClick={handleAgregarCarrito} disabled={product.stock === 0}>
+        <button 
+          onClick={handleAgregarCarrito} 
+          disabled={product.stock === 0}
+          aria-label={product.stock === 0 ? `${product.name} sin stock` : `Agregar ${product.name} al carrito`}
+        >
           {product.stock === 0 ? 'Sin stock' : 'Agregar al carrito'}
         </button>
-        <Link to={`/productos/${product.id}`} className="details-link">
+        <Link to={`/productos/${product.id}`} className="details-link" aria-label={`Ver detalles de ${product.name}`}>
           Ver mas
         </Link>
       </div>

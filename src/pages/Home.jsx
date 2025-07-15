@@ -164,10 +164,10 @@ const Home = () => {
               <HeroSubtitle>
                 Encuentra los mejores productos con calidad garantizada y envío rápido
               </HeroSubtitle>
-              <HeroButton as={Link} to="/galeria-de-productos" size="lg">
-                <FaShoppingBag className="me-2" />
+              <HeroButton as={Link} to="/galeria-de-productos" size="lg" aria-label="Explorar todos los productos disponibles">
+                <FaShoppingBag className="me-2" aria-hidden="true" />
                 Explorar Productos
-                <FaArrowRight className="ms-2" />
+                <FaArrowRight className="ms-2" aria-hidden="true" />
               </HeroButton>
             </Col>
           </Row>
@@ -186,12 +186,12 @@ const Home = () => {
             />
             
             {loading ? (
-              <LoadingContainer>
-                <Spinner animation="border" variant="primary" size="lg" />
+              <LoadingContainer role="status" aria-live="polite">
+                <Spinner animation="border" variant="primary" size="lg" aria-hidden="true" />
                 <p>Cargando productos...</p>
               </LoadingContainer>
             ) : error ? (
-              <Alert variant="danger" className="text-center">
+              <Alert variant="danger" className="text-center" role="alert">
                 <Alert.Heading>Error al cargar productos</Alert.Heading>
                 <p>No se pudieron cargar los productos. Por favor, intenta más tarde.</p>
               </Alert>
@@ -205,9 +205,10 @@ const Home = () => {
                       as={Link} 
                       to="/galeria-de-productos" 
                       size="lg"
+                      aria-label="Ver todos los productos disponibles en la galería"
                     >
                       Ver todos los productos
-                      <FaArrowRight className="ms-2" />
+                      <FaArrowRight className="ms-2" aria-hidden="true" />
                     </ViewAllButton>
                   </div>
                 )}

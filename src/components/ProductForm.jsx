@@ -22,7 +22,7 @@ const ProductForm = ({ isVisible, isEditing, productToEdit, onClose }) => {
   // Función de validación
   const validateDescription = (value) => {
     if (!value || value.trim().length < 10) {
-      return 'La descripción debe tener al menos 10 caracteres'
+      return 'La descripción debe tener al menos 10 caracteres';
     }
     return ''
   }
@@ -149,7 +149,12 @@ const ProductForm = ({ isVisible, isEditing, productToEdit, onClose }) => {
                 placeholder="Ingresa el nombre del producto"
                 disabled={isSubmitting}
                 required
+                aria-describedby={validationErrors.name ? "name-error" : undefined}
+                aria-invalid={validationErrors.name ? "true" : "false"}
               />
+              {validationErrors.name && (
+                <span className="error-text" id="name-error" role="alert">{validationErrors.name}</span>
+              )}
             </div>
             <div className="product-form-group">
               <label htmlFor="price">Precio</label>
@@ -164,7 +169,12 @@ const ProductForm = ({ isVisible, isEditing, productToEdit, onClose }) => {
                 min="0"
                 disabled={isSubmitting}
                 required
+                aria-describedby={validationErrors.price ? "price-error" : undefined}
+                aria-invalid={validationErrors.price ? "true" : "false"}
               />
+              {validationErrors.price && (
+                <span className="error-text" id="price-error" role="alert">{validationErrors.price}</span>
+              )}
             </div>
           </div>
           
@@ -181,7 +191,12 @@ const ProductForm = ({ isVisible, isEditing, productToEdit, onClose }) => {
                 min="0"
                 disabled={isSubmitting}
                 required
+                aria-describedby={validationErrors.stock ? "stock-error" : undefined}
+                aria-invalid={validationErrors.stock ? "true" : "false"}
               />
+              {validationErrors.stock && (
+                <span className="error-text" id="stock-error" role="alert">{validationErrors.stock}</span>
+              )}
             </div>
             <div className="product-form-group">
               <label htmlFor="image">URL de la Imagen</label>
@@ -194,7 +209,12 @@ const ProductForm = ({ isVisible, isEditing, productToEdit, onClose }) => {
                 placeholder="https://ejemplo.com/imagen.jpg"
                 disabled={isSubmitting}
                 required
+                aria-describedby={validationErrors.image ? "image-error" : undefined}
+                aria-invalid={validationErrors.image ? "true" : "false"}
               />
+              {validationErrors.image && (
+                <span className="error-text" id="image-error" role="alert">{validationErrors.image}</span>
+              )}
             </div>
           </div>
           
@@ -210,9 +230,11 @@ const ProductForm = ({ isVisible, isEditing, productToEdit, onClose }) => {
               disabled={isSubmitting}
               required
               className={validationErrors.description ? 'error' : ''}
+              aria-describedby="description-error"
+              aria-invalid={validationErrors.description ? "true" : "false"}
             />
             {validationErrors.description && (
-              <span className="error-text">{validationErrors.description}</span>
+              <span className="error-text" id="description-error" role="alert">{validationErrors.description}</span>
             )}
           </div>
           

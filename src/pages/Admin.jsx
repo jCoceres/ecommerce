@@ -138,19 +138,21 @@ const Admin = () => {
                         onClick={() => handleEdit(product)}
                         title="Editar producto"
                         disabled={deletingId === product.id}
+                        aria-label={`Editar producto ${product.name}`}
                       >
-                        <i className="fa-solid fa-edit"></i>
+                        <i className="fa-solid fa-edit" aria-hidden="true"></i>
                       </button>
                       <button 
                         className="btn-delete"
                         onClick={() => handleDelete(product.id)}
                         title="Eliminar producto"
                         disabled={deletingId === product.id}
+                        aria-label={`Eliminar producto ${product.name}`}
                       >
                         {deletingId === product.id ? (
-                          <i className="fa-solid fa-spinner fa-spin"></i>
+                          <i className="fa-solid fa-spinner fa-spin" aria-hidden="true"></i>
                         ) : (
-                          <i className="fa-solid fa-trash"></i>
+                          <i className="fa-solid fa-trash" aria-hidden="true"></i>
                         )}
                       </button>
                     </div>

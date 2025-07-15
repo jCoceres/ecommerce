@@ -2,8 +2,10 @@ import React from 'react'
 import { Container, Row, Col, Spinner, Alert } from 'react-bootstrap'
 import { useAppContext } from '../context/AppContext'
 import { useSearch } from '../hooks/useSearch'
+import { usePagination } from '../hooks/usePagination'
 import ProductList from '../components/ProductList'
 import SearchBar from '../components/SearchBar'
+import Pagination from '../components/Pagination'
 import styled from 'styled-components'
 
 const PageContainer = styled(Container)`
@@ -62,12 +64,30 @@ const ResultsInfo = styled.div`
 const GaleriaDeProductos = () => {
   const { products, loading, error } = useAppContext()
   const { searchTerm, filteredItems, handleSearchChange, clearSearch } = useSearch(products, ['name', 'description'])
+  
+  // Hook de paginación - 8 productos por página
+  const {
+    currentPage,
+    totalPages,
+    paginatedItems,
+    goToPage,
+    goToFirstPage,
+    goToLastPage,
+    goToPreviousPage,
+    goToNextPage,
+    getPageNumbers,
+    hasNextPage,
+    hasPreviousPage,
+    startIndex,
+    endIndex,
+    totalItems
+  } = usePagination(filteredItems, 8)
 
   if (loading) {
     return (
       <PageContainer>
-        <LoadingContainer>
-          <Spinner animation="border" variant="primary" size="lg" />
+        <LoadingContainer role="status" aria-live="polite">
+          <Spinner animation="border" variant="primary" size="lg" aria-hidden="true" />
           <p>Cargando productos...</p>
         </LoadingContainer>
       </PageContainer>
@@ -77,7 +97,7 @@ const GaleriaDeProductos = () => {
   if (error) {
     return (
       <PageContainer>
-        <Alert variant="danger" className="text-center">
+        <Alert variant="danger" className="text-center" role="alert">
           <Alert.Heading>Error al cargar productos</Alert.Heading>
           <p>No se pudieron cargar los productos. Por favor, intenta más tarde.</p>
         </Alert>
@@ -98,21 +118,39 @@ const GaleriaDeProductos = () => {
           />
           
           {searchTerm && (
-            <ResultsInfo>
+            <ResultsInfo role="status" aria-live="polite">
               {filteredItems.length > 0 
-                ? `Mostrando ${filteredItems.length} resultado${filteredItems.length !== 1 ? 's' : ''} para "${searchTerm}"`
+                ? `Encontrados ${filteredItems.length} resultado${filteredItems.length !== 1 ? 's' : ''} para "${searchTerm}"`
                 : `No se encontraron resultados para "${searchTerm}"`
               }
             </ResultsInfo>
           )}
           
           {filteredItems.length === 0 && searchTerm ? (
-            <NoResultsContainer>
+            <NoResultsContainer role="status">
               <h3>🔍 No se encontraron productos</h3>
               <p>Intenta con otros términos de búsqueda</p>
             </NoResultsContainer>
           ) : (
-            <ProductList products={filteredItems} />
+            <>
+              <ProductList products={paginatedItems} />
+              
+              <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={goToPage}
+                onPreviousPage={goToPreviousPage}
+                onNextPage={goToNextPage}
+                onFirstPage={goToFirstPage}
+                onLastPage={goToLastPage}
+                hasNextPage={hasNextPage}
+                hasPreviousPage={hasPreviousPage}
+                getPageNumbers={getPageNumbers}
+                startIndex={startIndex}
+                endIndex={endIndex}
+                totalItems={totalItems}
+              />
+            </>
           )}
         </Col>
       </Row>
