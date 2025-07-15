@@ -4,7 +4,7 @@ import "./styleCart.css"
 const Cart = ({ cartItems, isOpen, onClose, eliminarProducto, vaciarCarrito }) => {
   const total = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
   
-  // Cerrar con tecla Escape
+  
   useEffect(() => {
     const handleEscapeKey = (event) => {
       if (event.key === 'Escape' && isOpen) {
@@ -14,7 +14,7 @@ const Cart = ({ cartItems, isOpen, onClose, eliminarProducto, vaciarCarrito }) =
 
     if (isOpen) {
       document.addEventListener('keydown', handleEscapeKey);
-      
+  
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'auto';
@@ -25,8 +25,7 @@ const Cart = ({ cartItems, isOpen, onClose, eliminarProducto, vaciarCarrito }) =
       document.body.style.overflow = 'auto';
     };
   }, [isOpen, onClose]);
-
-  // Cerrar al hacer clic fuera del drawer
+  
   const handleOverlayClick = (event) => {
     if (event.target === event.currentTarget) {
       onClose();
@@ -37,7 +36,7 @@ const Cart = ({ cartItems, isOpen, onClose, eliminarProducto, vaciarCarrito }) =
   
   return (
     <>
-      {/* Overlay para cerrar al hacer clic fuera */}
+  
       <div className="cart-overlay" onClick={handleOverlayClick}>
         <div className={`cart-drawer ${isOpen ? "open" : ""}`} onClick={(e) => e.stopPropagation()}>
           <div className="cart-header">

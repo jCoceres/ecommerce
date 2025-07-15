@@ -1,7 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 
-// Crear el contexto de autenticación
+
 export const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
@@ -9,7 +9,7 @@ export function AuthProvider({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  // Verificar si hay un token almacenado al cargar la aplicación
+
   useEffect(() => {
     const storedToken = localStorage.getItem('authToken');
     const storedUser = localStorage.getItem('authUser');
@@ -30,7 +30,7 @@ export function AuthProvider({ children }) {
 
   const login = async (email, password) => {
     try {
-      // Simular llamada a API para autenticación
+
       const res = await fetch('/data/users.json');
       const users = await res.json();
       
@@ -40,14 +40,14 @@ export function AuthProvider({ children }) {
         throw new Error('Credenciales inválidas');
       }
 
-      // Simulando la creación de un token 
+
       const token = `fake-token-${foundUser.email}-${Date.now()}`;
       
-      // Guardar en localStorage
+
       localStorage.setItem('authToken', token);
       localStorage.setItem('authUser', JSON.stringify(foundUser));
       
-      // Actualizar estado
+
       setUser(foundUser);
       setIsAuthenticated(true);
       
@@ -68,12 +68,12 @@ export function AuthProvider({ children }) {
     toast.info('Sesión cerrada exitosamente');
   };
 
-  // Función para verificar si el usuario tiene un rol específico
+
   const hasRole = (role) => {
     return user?.role === role;
   };
 
-  // Función para obtener el token actual
+
   const getToken = () => {
     return localStorage.getItem('authToken');
   };

@@ -4,13 +4,13 @@ import { toast } from 'react-toastify'
 const AppContext = createContext();
 
 const AppProvider = ({ children }) => {
-  // Estados
+
   const [cart, setCart] = useState([]);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
-  // Funciones del carrito
+  
   const handleAddToCart = (product, quantity = 1) => {
     const productExist = cart.find(item => item.id === product.id);
     if (productExist) {
@@ -34,7 +34,7 @@ const AppProvider = ({ children }) => {
 
   const handleAddProduct = async (productData) => {
     try {
-      // Crear producto en MockAPI
+    
       const response = await fetch('https://684247f7e1347494c31c4ecb.mockapi.io/api/v1/products', {
         method: 'POST',
         headers: {
@@ -55,7 +55,7 @@ const AppProvider = ({ children }) => {
 
       const newProduct = await response.json()
       
-      // Actualizar estado local
+    
       const updatedProducts = [...products, newProduct]
       setProducts(updatedProducts)
       toast.success('Producto creado exitosamente')
@@ -63,13 +63,13 @@ const AppProvider = ({ children }) => {
     } catch (error) {
       console.error('❌ Error al crear producto:', error)
       toast.error('Error al crear el producto')
-      throw error // Re-lanzar el error para que el componente lo maneje
+      throw error 
     }
   }
 
   const handleUpdateProduct = async (productData) => {
     try {
-      // Actualizar en MockAPI
+      
       const response = await fetch(`https://684247f7e1347494c31c4ecb.mockapi.io/api/v1/products/${productData.id}`, {
         method: 'PUT',
         headers: {
@@ -90,7 +90,6 @@ const AppProvider = ({ children }) => {
 
       const updatedProduct = await response.json()
       
-      // Actualizar estado local
       const updatedProducts = products.map(product => 
         product.id === updatedProduct.id ? updatedProduct : product
       )
@@ -100,13 +99,13 @@ const AppProvider = ({ children }) => {
     } catch (error) {
       console.error('❌ Error al actualizar producto:', error)
       toast.error('Error al actualizar el producto')
-      throw error // Re-lanzar el error para que el componente lo maneje
+      throw error 
     }
   }
 
   const handleDeleteProduct = async (productId) => {
     try {
-      // Eliminar de MockAPI
+
       const response = await fetch(`https://684247f7e1347494c31c4ecb.mockapi.io/api/v1/products/${productId}`, {
         method: 'DELETE'
       })
@@ -115,7 +114,7 @@ const AppProvider = ({ children }) => {
         throw new Error('Error al eliminar producto de MockAPI')
       }
 
-      // Actualizar estado local
+
       const updatedProducts = products.filter(product => product.id !== productId)
       setProducts(updatedProducts)
       
@@ -127,9 +126,8 @@ const AppProvider = ({ children }) => {
     }
   }
 
-  // Efecto para cargar productos
   useEffect(() => {
-    // Cargar productos solo de MockAPI
+  
     fetch('https://684247f7e1347494c31c4ecb.mockapi.io/api/v1/products')
       .then(res => res.json())
       .then(data => {
@@ -142,20 +140,17 @@ const AppProvider = ({ children }) => {
       .finally(() => setLoading(false))
   }, [])
 
-  // Valor del contexto
+  
   const value = {
-    // Estados
     cart,
     products,
     loading,
     error,
     
-    // Funciones del carrito
     handleAddToCart,
     handleRemoveProductFromCart,
     handleClearCart,
     
-    // Funciones de productos
     handleAddProduct,
     handleUpdateProduct,
     handleDeleteProduct
