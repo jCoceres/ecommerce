@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useAppContext } from '../context/AppContext'
+import { useAppContext } from '../../context/AppContext'
 import './styleProductForm.css'
 
 const ProductForm = ({ isVisible, isEditing, productToEdit, onClose }) => {
@@ -16,10 +16,8 @@ const ProductForm = ({ isVisible, isEditing, productToEdit, onClose }) => {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState('')
 
-  // Agregar estado para errores de validación
   const [validationErrors, setValidationErrors] = useState({})
 
-  // Función de validación
   const validateDescription = (value) => {
     if (!value || value.trim().length < 10) {
       return 'La descripción debe tener al menos 10 caracteres';
@@ -28,7 +26,6 @@ const ProductForm = ({ isVisible, isEditing, productToEdit, onClose }) => {
   }
 
   useEffect(() => {
-    // logica para manejar los cambios en el formulario
     if (isEditing && productToEdit) {
       setForm({
         id: productToEdit.id,
@@ -48,25 +45,21 @@ const ProductForm = ({ isVisible, isEditing, productToEdit, onClose }) => {
       })
     }
     
-    // Limpiar error cuando se cambia el producto a editar
     setError('')
   }, [isEditing, productToEdit])
 
   const handleInputChange = (e) => {
-    // logica para manejar los cambios en el formulario
     const { name, value } = e.target
     setForm(prev => ({
       ...prev,
       [name]: value
     }))
     
-    // Validar descripción en tiempo real
     if (name === 'description') {
       const error = validateDescription(value)
       setValidationErrors(prev => ({ ...prev, description: error }))
     }
     
-    // Limpiar error cuando el usuario empieza a escribir
     if (error) {
       setError('')
     }
@@ -74,24 +67,30 @@ const ProductForm = ({ isVisible, isEditing, productToEdit, onClose }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    setIsSubmitting(true)
-    setError('')
+    
+    if (isSubmitting) return
     
     try {
-      // Lógica de procesamiento del formulario
+      setIsSubmitting(true)
+      setError('')
+      
+      const descriptionError = validateDescription(form.description)
+      if (descriptionError) {
+        setValidationErrors(prev => ({ ...prev, description: descriptionError }))
+        return
+      }
+      
       if (isEditing) {
-        // Actualizar producto existente
         await handleUpdateProduct(form)
       } else {
-        // Crear nuevo producto
         await handleAddProduct(form)
       }
       
-      // Cerrar el formulario 
-      handleCancel()
+      onClose()
+      
     } catch (error) {
-      console.error('❌ Error al procesar el formulario:', error)
-      setError('Error al guardar el producto. Por favor, intenta nuevamente.')
+      console.error('Error al procesar formulario:', error)
+      setError(error.message || 'Error al procesar el formulario')
     } finally {
       setIsSubmitting(false)
     }
@@ -105,15 +104,11 @@ const ProductForm = ({ isVisible, isEditing, productToEdit, onClose }) => {
       description: '',
       stock: ''
     })
+    setValidationErrors({})
     setError('')
-    
-    // Notificar al componente padre que se cerró el formulario
-    if (onClose) {
-      onClose()
-    }
+    onClose()
   }
 
-  // No renderizar si no es visible
   if (!isVisible) {
     return null
   }
@@ -156,6 +151,7 @@ const ProductForm = ({ isVisible, isEditing, productToEdit, onClose }) => {
                 <span className="error-text" id="name-error" role="alert">{validationErrors.name}</span>
               )}
             </div>
+            
             <div className="product-form-group">
               <label htmlFor="price">Precio</label>
               <input
@@ -198,8 +194,9 @@ const ProductForm = ({ isVisible, isEditing, productToEdit, onClose }) => {
                 <span className="error-text" id="stock-error" role="alert">{validationErrors.stock}</span>
               )}
             </div>
+            
             <div className="product-form-group">
-              <label htmlFor="image">URL de la Imagen</label>
+              <label htmlFor="image">URL de Imagen</label>
               <input
                 type="url"
                 id="image"

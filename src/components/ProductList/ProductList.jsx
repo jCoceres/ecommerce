@@ -3,7 +3,7 @@ import { Row, Col, Card, Button, Badge } from 'react-bootstrap'
 import { FaShoppingCart, FaEye, FaTag } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { useAppContext } from '../context/AppContext'
+import { useAppContext } from '../../context/AppContext'
 
 const ProductCard = styled(Card)`
   height: 100%;
@@ -42,11 +42,22 @@ const ProductTitle = styled(Card.Title)`
 const ProductDescription = styled(Card.Text)`
   color: #666;
   font-size: 0.9rem;
-  height: 4rem;
+  min-height: 4.5rem;
+  max-height: 6rem;
   overflow: hidden;
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
+  line-height: 1.4;
+  margin-bottom: 1rem;
+  
+  /* Asegurar que el texto se vea bien en móviles */
+  @media (max-width: 768px) {
+    min-height: 5rem;
+    max-height: 7rem;
+    font-size: 0.85rem;
+    -webkit-line-clamp: 5;
+  }
 `
 
 const PriceContainer = styled.div`

@@ -1,11 +1,11 @@
 import React from 'react'
 import { Container, Row, Col, Spinner, Alert } from 'react-bootstrap'
-import { useAppContext } from '../context/AppContext'
-import { useSearch } from '../hooks/useSearch'
-import { usePagination } from '../hooks/usePagination'
-import ProductList from '../components/ProductList'
-import SearchBar from '../components/SearchBar'
-import Pagination from '../components/Pagination'
+import { useAppContext } from '../../context/AppContext';
+import { useSearch } from '../../hooks/useSearch';
+import { usePagination } from '../../hooks/usePagination';
+import ProductList from '../../components/ProductList/ProductList';
+import SearchBar from '../../components/SearchBar/SearchBar';
+import Pagination from '../../components/Pagination/Pagination';
 import styled from 'styled-components'
 
 const PageContainer = styled(Container)`

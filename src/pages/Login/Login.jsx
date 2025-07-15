@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { useAuthContext } from '../hooks/useAuthContext'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { useAuthContext } from '../../hooks/useAuthContext'
+import { useNavigate } from 'react-router-dom'
 import './styleLogin.css'
 
 const Login = () => {
@@ -63,11 +63,10 @@ const Login = () => {
       const result = await login(formData.email, formData.password);
       
       if (result.success) {
-        // Redireccionar según el rol del usuario
         if (result.user.role === 'admin') {
-          navigate('/admin');
+          navigate('/admin')
         } else {
-          navigate('/');
+          navigate('/')
         }
       } else {
         setErrors({ general: result.error || 'Error al iniciar sesión' });

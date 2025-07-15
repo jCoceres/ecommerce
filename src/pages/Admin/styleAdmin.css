@@ -235,10 +235,11 @@
   line-height: 1.5;
   margin: 0 0 15px 0;
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  min-height: 60px;
+  min-height: 80px;
+  max-height: 120px;
 }
 
 .product-card-footer {

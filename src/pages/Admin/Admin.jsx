@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { useAppContext } from '../context/AppContext'
-import ProductForm from '../components/ProductForm'
+import { useAppContext } from '../../context/AppContext';
+import ProductForm from '../../components/ProductForm/ProductForm';
 import './styleAdmin.css'
 
 const Admin = () => {

@@ -3,11 +3,11 @@ import { Container, Row, Col, Spinner, Alert, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { FaArrowRight, FaShoppingBag } from 'react-icons/fa'
 import styled from 'styled-components'
-import { useAppContext } from '../context/AppContext'
-import { useSearch } from '../hooks/useSearch'
-import ProductList from '../components/ProductList'
-import SearchBar from '../components/SearchBar'
-import SEO from '../components/SEO'
+import { useAppContext } from '../../context/AppContext';
+import { useSearch } from '../../hooks/useSearch';
+import ProductList from '../../components/ProductList/ProductList';
+import SearchBar from '../../components/SearchBar/SearchBar';
+import SEO from '../../components/SEO/SEO';
 
 const HeroSection = styled.section`
   background: linear-gradient(135deg, #718096 0%, #4a5568 50%, #2d3748 100%);

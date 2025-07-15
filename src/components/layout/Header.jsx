@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { Navbar, Nav, Container, Badge, Button } from 'react-bootstrap'
 import { FaShoppingCart, FaSignInAlt, FaSignOutAlt, FaUserShield, FaHome, FaInfoCircle, FaImages, FaPhone } from 'react-icons/fa'
 import styled from 'styled-components'
-import Cart from '../Cart'
+import Cart from '../Cart/Cart';
 import { useAppContext } from '../../context/AppContext'
 import { useAuthContext } from '../../hooks/useAuthContext'
 
