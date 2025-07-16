@@ -1,11 +1,10 @@
 .login-container {
-  height: 100vh;
   background-color: #f7fafc;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 1rem;
-  padding-top: 90px; /* Espacio para el header fijo */
+  padding-top: 90px; 
   padding-bottom: 1rem;
   box-sizing: border-box;
   overflow-y: auto;
