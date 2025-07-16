@@ -12,7 +12,7 @@ import SEO from '../../components/SEO/SEO';
 const HeroSection = styled.section`
   background: linear-gradient(135deg, #718096 0%, #4a5568 50%, #2d3748 100%);
   color: white;
-  padding: 4rem 0;
+  padding: 7rem 0;
   text-align: center;
   margin-bottom: 3rem;
 `
